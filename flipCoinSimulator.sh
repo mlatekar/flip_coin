@@ -50,6 +50,13 @@ do
 			percentage
          echo "number of percentage : " ${combination[@]}
 			;;
+		 3)
+         flip $numOfFlip $coin
+         echo "after fliping the coin :" ${!combination[@]}
+         echo "number of combination :"${combination[@]}
+         percentage
+         echo "number of percentage : " ${combination[@]}
+         ;;
 		*)
 			 echo "not valid input"
 			break;
