@@ -10,11 +10,11 @@ function flip ()
 	if [[ $coin -eq 1 ]]
 	then
 	echo "It's Head "
-	#((Head++))
+	((Head++))
 	combination[Head]=$Head
 	else
 	echo "It's Tail"
-	#((Tail++))
+	((Tail++))
 	combination[Tail]=$Tail
 	fi
 done
