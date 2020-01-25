@@ -18,23 +18,32 @@ for (( i=1; i<=$1; i++ ))
  newkey $key
 done
 }
+
 function newkey() 
-{
+ {
 	combination[$1]=$((${combination[$1]}+1));
-}
+ }
+
 function percentage()
-{
+ {
 	for i in ${!combination[@]}
-	do
-		combination[$i]=$((combination[$i]*100/$numOfFlip))
+   	do
+			combination[$i]=`echo "scale=2;${combination[$i]%%.*}*100/$numOfFlip" | bc`;
 	done
-}
+ }
+function sort_the_coin()
+ {
+ 	for i in "${!combination[@]}"
+	 do
+  		echo "Winning combination is : " $i ${combination["$i"]}
+	 done | sort -k2 -rn | head  -1
+ }
 
 read -p "do you want to flip coin(y/n) : " accept
-while [[ $accept == "y" ]]
-do
+ while [[ $accept == "y" ]]
+  do
 	read -p "Enter number of flip and number of flip :" numOfFlip coin
-		declare -A combination	
+	  declare -A combination	
 		case $coin in
 		1)
 			flip $numOfFlip $coin
@@ -58,9 +67,10 @@ do
          echo "number of percentage : " ${combination[@]}
          ;;
 		*)
-			 echo "not valid input"
+		   echo "not valid input"
 			break;
    esac
+sort_the_coin
 unset combination[@]
 read -p "want to continue(y/n) :" accept
 done
